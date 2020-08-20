@@ -1,0 +1,35 @@
+<aura:component >
+    <!-- This holds the values for the player and dragon health-->
+    <aura:attribute name="playerHealth" type="Integer" default="50"/>
+    <aura:attribute name="dragonHealth" type="Integer" default="100"/>
+    
+    <!-- This holds the value for whether the battle is over or not,
+	as well as the message to display at the end of the battle.-->
+    <aura:attribute name="end" type="String" default=""/>
+    
+    <!-- This is the boolean for the battle being over.-->
+    <aura:attribute name="battleOver" type="Boolean" default="false"/>
+    
+    <!-- A turn counter, not currently used.-->
+    <aura:attribute name="turn" type="Integer" default="1"/>
+    
+    <!-- Handles event for the player actions-->
+    <aura:handler name="customEvent" event="c:ComponentEvent" action="{!c.handlePlayerAttack}"/>
+    <!-- This method will use logic to determine if the battle is over, and is
+	re-run every time an action takes place on the page.-->
+    <aura:renderIf isTrue="{!v.battleOver}">
+        {!v.end}
+        <!--<lightning:button aura:id="restart" label="Restart" onclick="{!c.restart}"/>-->
+        <!-- This will occur if the aura:renderIf isTrue value is false-->
+        <aura:set attribute="else">
+            <!-- Will only display and have it's events run if the value is false.-->
+            <c:BattleMath/>
+            <div>
+                Player Health: {!v.playerHealth}
+            </div>
+            <div>
+                Dragon Health: {!v.dragonHealth}
+            </div>
+        </aura:set>
+    </aura:renderIf>
+</aura:component>

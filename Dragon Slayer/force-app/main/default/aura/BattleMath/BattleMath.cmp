@@ -1,0 +1,44 @@
+<aura:component>
+    <!--These store a list of string that will display during the 
+	game. The first three are for the dragon, the last one is
+	for the player-->
+    <aura:attribute name="dragonAttackList" type="String[]"/>
+    <aura:attribute name="dragonActionList" type="String[]"/>
+    <aura:attribute name="dragonResultList" type="String[]"/>
+    <aura:attribute name="playerActionList" type="String[]"/>
+    
+    <!--This stores the action the player chose.-->
+    <aura:attribute name="playerAction" type="String" default="A battle approaches"/>
+    <!--This stores how many times in a row the dragon has attacked-->
+    <aura:attribute name="dragonAttackCounter" type="Integer" default="0"/>
+    <!--This determines if the dragon is attacking or taking an action-->
+    <aura:attribute name="doesDragonAttack" type="Boolean" default="False"/>
+    <!--This determines the damage the dragon will deal to the player-->
+    <aura:attribute name="dragonDamage" type="Integer" default="0"/>
+    
+    <!--This stores the text that displays from the dragons current action-->
+    <aura:attribute name="displayCurrentAction" type="String" default="A battle approaches"/>
+    <!--This stores the text for the dragons next action, so the player can prepare-->
+    <aura:attribute name="displayNextAction" type="String" default=""/>
+    <!--This stores the action the player chose-->
+    <aura:attribute name="displayPlayerAction" type="String" default=""/>
+    
+    <!--This initializes the arrays for action the player and dragon can take-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!--This registers a component event-->
+    <aura:registerEvent name="customEvent" type="c:ComponentEvent"/>
+    
+    <!--This holds all of the buttons for the players actions-->
+    <div class="slds-grid">
+        <lightning:button aura:id="AttackButton" label="Attack" onclick="{!c.playerAttack}"/>
+        <lightning:button aura:id="DefendButton" label="Raise Shield" onclick="{!c.playerDefend}"/>
+        <lightning:button aura:id="ParalyzeButton" label="Wand of Paralysis" onclick="{!c.playerParalyze}"/>
+        <lightning:button aura:id="FireballButton" label="Fireball" onclick="{!c.playerFireball}"/>
+    </div>
+    <!--This displays what events occurred after the last action-->
+    <div>
+        <p>{!v.displayPlayerAction}</p>
+        <p>{!v.displayCurrentAction}</p>
+        <p>{!v.displayNextAction}</p>
+    </div>
+</aura:component>

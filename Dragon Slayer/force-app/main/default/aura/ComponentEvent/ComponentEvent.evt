@@ -1,0 +1,10 @@
+<!-- Somewhat important actually, this is used to store parameters
+used in the functions from the BattleMath controller to the DisplayBattle Controller-->
+<aura:event type="COMPONENT" description="Event template">
+    <aura:attribute name="playerDamage" type="Integer"/>
+    <aura:attribute name="dragonDamage" type="Integer"/>
+    <aura:attribute name="dragonDoesDamage" type="Boolean" default="false"/>
+    <aura:attribute name="playerDoesDamage" type="Boolean" default="false"/>
+    <aura:attribute name="dragonNextAction" type="String"/>
+    <aura:attribute name="dragonCurrentAction" type="String"/>
+</aura:event>
